@@ -140,7 +140,7 @@ soroban deploy \
 
 ```shell
 soroban invoke \
-    --id 398bc62102554d0186f9fb6093820411806a76a2c716c3cdf13c9bf210062da8 \
+    --id 789e274786b604bf61217802f2a12be4da362613ca51ca0f59c43068ca8a76ca \
     --secret-key SBFQBFIDHAVLX6TLU5BJWAPGI6DZGRTVHVOL4YFHXYNTK53ZR6ASH4FU \
     --rpc-url http://localhost:8000/soroban/rpc \
     --network-passphrase 'Standalone Network ; February 2017' \

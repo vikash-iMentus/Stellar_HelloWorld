@@ -21,8 +21,6 @@ export async function submitTrs(req, res) {
         console.log(`Tx Failed! More details:\n${JSON.stringify(error)}`);
     }
 
-
-
 }
 
 
