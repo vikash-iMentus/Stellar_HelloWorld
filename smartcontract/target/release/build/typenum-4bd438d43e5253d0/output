@@ -1,0 +1,3 @@
+cargo:rerun-if-changed=build/main.rs
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/home/imentus/Documents/mywork/test soroban/soroban-hello-world-rahul/smartcontract/target/release/build/typenum-4bd438d43e5253d0/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/home/imentus/Documents/mywork/test soroban/soroban-hello-world-rahul/smartcontract/target/release/build/typenum-4bd438d43e5253d0/out/op.rs

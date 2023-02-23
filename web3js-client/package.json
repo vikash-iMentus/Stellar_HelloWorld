@@ -1,0 +1,24 @@
+{
+  "name": "web3js-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "expo-random": "^13.0.0",
+    "express": "^4.18.2",
+    "gitignore": "^0.7.0",
+    "json-xdr": "^0.1.1",
+    "nft.storage": "^7.0.0",
+    "node-fetch": "^3.3.0",
+    "soroban-client": "^0.1.3",
+    "stellar-sdk": "^10.4.1"
+  }
+}

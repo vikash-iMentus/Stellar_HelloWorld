@@ -1,0 +1,1 @@
+/home/vikash/Documents/Vikash_WorkingSpace_Stellar/abc/smartcontract/target/wasm32-unknown-unknown/release/soroban_hello_world.wasm: /home/vikash/Documents/Vikash_WorkingSpace_Stellar/abc/smartcontract/src/lib.rs

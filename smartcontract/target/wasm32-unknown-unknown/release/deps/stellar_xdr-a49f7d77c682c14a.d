@@ -1,0 +1,10 @@
+/home/imentus/Documents/mywork/test soroban/soroban-hello-world-rahul/smartcontract/target/wasm32-unknown-unknown/release/deps/stellar_xdr-a49f7d77c682c14a.rmeta: /home/imentus/.cargo/registry/src/github.com-1ecc6299db9ec823/stellar-xdr-0.0.6/src/lib.rs /home/imentus/.cargo/registry/src/github.com-1ecc6299db9ec823/stellar-xdr-0.0.6/src/next.rs /home/imentus/.cargo/registry/src/github.com-1ecc6299db9ec823/stellar-xdr-0.0.6/src/scval_conversions.rs /home/imentus/.cargo/registry/src/github.com-1ecc6299db9ec823/stellar-xdr-0.0.6/src/scval_validations.rs
+
+/home/imentus/Documents/mywork/test soroban/soroban-hello-world-rahul/smartcontract/target/wasm32-unknown-unknown/release/deps/libstellar_xdr-a49f7d77c682c14a.rlib: /home/imentus/.cargo/registry/src/github.com-1ecc6299db9ec823/stellar-xdr-0.0.6/src/lib.rs /home/imentus/.cargo/registry/src/github.com-1ecc6299db9ec823/stellar-xdr-0.0.6/src/next.rs /home/imentus/.cargo/registry/src/github.com-1ecc6299db9ec823/stellar-xdr-0.0.6/src/scval_conversions.rs /home/imentus/.cargo/registry/src/github.com-1ecc6299db9ec823/stellar-xdr-0.0.6/src/scval_validations.rs
+
+/home/imentus/Documents/mywork/test soroban/soroban-hello-world-rahul/smartcontract/target/wasm32-unknown-unknown/release/deps/stellar_xdr-a49f7d77c682c14a.d: /home/imentus/.cargo/registry/src/github.com-1ecc6299db9ec823/stellar-xdr-0.0.6/src/lib.rs /home/imentus/.cargo/registry/src/github.com-1ecc6299db9ec823/stellar-xdr-0.0.6/src/next.rs /home/imentus/.cargo/registry/src/github.com-1ecc6299db9ec823/stellar-xdr-0.0.6/src/scval_conversions.rs /home/imentus/.cargo/registry/src/github.com-1ecc6299db9ec823/stellar-xdr-0.0.6/src/scval_validations.rs
+
+/home/imentus/.cargo/registry/src/github.com-1ecc6299db9ec823/stellar-xdr-0.0.6/src/lib.rs:
+/home/imentus/.cargo/registry/src/github.com-1ecc6299db9ec823/stellar-xdr-0.0.6/src/next.rs:
+/home/imentus/.cargo/registry/src/github.com-1ecc6299db9ec823/stellar-xdr-0.0.6/src/scval_conversions.rs:
+/home/imentus/.cargo/registry/src/github.com-1ecc6299db9ec823/stellar-xdr-0.0.6/src/scval_validations.rs:

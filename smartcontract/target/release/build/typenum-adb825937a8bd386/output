@@ -1,0 +1,3 @@
+cargo:rerun-if-changed=build/main.rs
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/home/vikash/Documents/Vikash_WorkingSpace_Steller/abc/smartcontract/target/release/build/typenum-adb825937a8bd386/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/home/vikash/Documents/Vikash_WorkingSpace_Steller/abc/smartcontract/target/release/build/typenum-adb825937a8bd386/out/op.rs
