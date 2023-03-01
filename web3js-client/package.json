@@ -18,7 +18,7 @@
     "json-xdr": "^0.1.1",
     "nft.storage": "^7.0.0",
     "node-fetch": "^3.3.0",
-    "soroban-client": "^0.1.3",
+    "soroban-client": "^0.4.0",
     "stellar-sdk": "^10.4.1"
   }
 }

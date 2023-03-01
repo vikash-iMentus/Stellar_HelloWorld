@@ -4,7 +4,7 @@ import { submitTrs } from "./submitTrx.js";
 import { setHello } from "./helloServer.js";
 import dotenv from "dotenv"
 dotenv.config();
-
+const port = 5000;
 const app = express();
 
 app.use(express.json());
@@ -17,4 +17,4 @@ app.post("/hello", setHello);
 app.post("/payment", setPayment);
 app.post("/sendTrx", submitTrs);
 
-app.listen(5000);
+app.listen(port, () => console.log('App listening on port ' + port));

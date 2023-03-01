@@ -4,14 +4,9 @@ import * as SorobanClient from "soroban-client";
 
 dotenv.config()
 
-// const kp = SorobanClient.Keypair.random();
-// console.log(process.env.NETWORK_PASSPHRASE);
 const invokerKeypair = SorobanClient.Keypair.fromSecret(process.env.PRIVATE_KEY_INVOKER);
 
-// Log the keypair details: Public and Secret Keys
-//console.log(`Invoker Public Key: ${invokerKeypair.publicKey()}`);
-
-const tx = SorobanClient.TransactionBuilder.fromXDR("AAAAAgAAAAA5oQsn83P/VuTBFEO9zmqylZICuJqL7H7jdibHya/XaQAAAGQAAAGYAAAABwAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAGAAAAAAAAAAEAAAABAAAAAEAAAAEAAAAIHieJ0eGtgS/YSF4AvKhK+TaNiYTylHKD1nEMGjKinbKAAAABQAAAAVoZWxsbwAAAAAAAAUAAAAGdmlrYXNoAAAAAAAEAAAAAQAAAAIAAAAAAAAACwAAAAEAAAAGeJ4nR4a2BL9hIXgC8qEr5No2JhPKUcoPWcQwaMqKdsoAAAADAAAAAwAAAAAAAAAAAAAAAA==", process.env.NETWORK_PASSPHRASE);
+const tx = SorobanClient.TransactionBuilder.fromXDR("AAAAAgAAAAD6F41mIP5FgS3o/pl1xQrVs8/BL14clmUwy9PNWJkj2gAAAGQAAp7aAAAAAwAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAGAAAAAAAAAAEAAAABAAAAAEAAAAGAAAAIHX6UKvD7qWgBsDlLi/dnUwBHrEsX+q/Rwt/7zAtsIctAAAABQAAAAp0ZXN0X2hlbGxvAAAAAAAFAAAAA0pheQAAAAABAAAAAgAAAAEAAAAGdfpQq8PupaAGwOUuL92dTAEesSxf6r9HC3/vMC2why0AAAADAAAAAwAAAAAAAAAAAAAAAAAAAAA=", process.env.NETWORK_PASSPHRASE);
 console.log("Converted in trs obj:", tx);
 
 const trs = tx.sign(invokerKeypair);

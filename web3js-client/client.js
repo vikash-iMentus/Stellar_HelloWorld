@@ -112,11 +112,26 @@ async function main() {
 
     console.log("🚀 ~ file: client.js ~ line 73 ~ main ~ invokerKeypair.publicKey()", invokerKeypair.publicKey());
 
-    let { sequence } = await server.getAccount(invokerKeypair.publicKey())
+    let { sequence } = await server// let classic_transaction = new SorobanClient.TransactionBuilder(invokerAccount, {
+        //     fee: 100,
+        //     networkPassphrase: process.env.NETWORK_PASSPHRASE,
+        //     v1: true
+        // })
+        //     .addOperation(
+        //         SorobanClient.Operation.payment({
+        //             destination: 'GASOCNHNNLYFNMDJYQ3XFMI7BYHIOCFW3GJEOWRPEGK2TDPGTG2E5EDW',
+        //             asset: SorobanClient.Asset.native(),
+        //             amount: '100.50'
+        //         })
+        //     )
+        //     .setTimeout(SorobanClient.TimeoutInfinite)
+        //     .build();
+        // console.log("🚀 ~ file: client.js ~ line 107 ~ main ~ classic_transaction", classic_transaction);.getAccount(invokerKeypair.publicKey())
     console.log("🚀 ~ file: client.js ~ line 72 ~ main ~ sequence", sequence);
 
     let invokerAccount = new SorobanClient.Account(invokerKeypair.publicKey(), sequence) // In stellar-sdk: // const invokerAccount = await server.loadAccount(invokerKeypair.publicKey());
     console.log("🚀 ~ file: client.js ~ line 74 ~ main ~ invokerAccount", invokerAccount);
+
 
     // // Argument Type should be ScVal array object: SorobanClient.xdr.ScVal[] 
 
@@ -184,7 +199,21 @@ async function main() {
     })
         .addOperation(SorobanClient.Operation.invokeHostFunction(opts))
         .setTimeout(SorobanClient.TimeoutInfinite)
-        .build();
+        .build();// let classic_transaction = new SorobanClient.TransactionBuilder(invokerAccount, {
+            //     fee: 100,
+            //     networkPassphrase: process.env.NETWORK_PASSPHRASE,
+            //     v1: true
+            // })
+            //     .addOperation(
+            //         SorobanClient.Operation.payment({
+            //             destination: 'GASOCNHNNLYFNMDJYQ3XFMI7BYHIOCFW3GJEOWRPEGK2TDPGTG2E5EDW',
+            //             asset: SorobanClient.Asset.native(),
+            //             amount: '100.50'
+            //         })
+            //     )
+            //     .setTimeout(SorobanClient.TimeoutInfinite)
+            //     .build();
+            // console.log("🚀 ~ file: client.js ~ line 107 ~ main ~ classic_transaction", classic_transaction);
     console.log("🚀 ~ file: client.js ~ line 185 ~ main ~ build hello_transaction without footprint, only opts", hello_transaction);
 
     // updating footprint in hello_transaction // Footprint Way 01:
@@ -204,28 +233,28 @@ async function main() {
 
     // Finally, send the singed tx obj to the servers.
     try {
-        let response = await server.sendTransaction(transaction_with_footprint); //Soroban server do not have a submitTransaction endpoint
+        let response = await server.sendTransaction(transaction_with_footprint); // Soroban server do not have a submitTransaction endpoint
         console.log(`transaction_with_footprint was successfully submitted.\nComplete response: ${JSON.stringify(response)} \nTransaction hash: ${response.id}`);
     } catch (error) {
         console.log(`Tx Failed! More details:\n${JSON.stringify(error)}`);
     }
 
     // /********** Dummy Classic Tx Obj: For Reference **********/
-    let classic_transaction = new SorobanClient.TransactionBuilder(invokerAccount, {
-        fee: 100,
-        networkPassphrase: process.env.NETWORK_PASSPHRASE,
-        v1: true
-    })
-        .addOperation(
-            SorobanClient.Operation.payment({
-                destination: 'GASOCNHNNLYFNMDJYQ3XFMI7BYHIOCFW3GJEOWRPEGK2TDPGTG2E5EDW',
-                asset: SorobanClient.Asset.native(),
-                amount: '100.50'
-            })
-        )
-        .setTimeout(SorobanClient.TimeoutInfinite)
-        .build();
-    console.log("🚀 ~ file: client.js ~ line 107 ~ main ~ classic_transaction", classic_transaction);
+    // let classic_transaction = new SorobanClient.TransactionBuilder(invokerAccount, {
+    //     fee: 100,
+    //     networkPassphrase: process.env.NETWORK_PASSPHRASE,
+    //     v1: true
+    // })
+    //     .addOperation(
+    //         SorobanClient.Operation.payment({
+    //             destination: 'GASOCNHNNLYFNMDJYQ3XFMI7BYHIOCFW3GJEOWRPEGK2TDPGTG2E5EDW',
+    //             asset: SorobanClient.Asset.native(),
+    //             amount: '100.50'
+    //         })
+    //     )
+    //     .setTimeout(SorobanClient.TimeoutInfinite)
+    //     .build();
+    // console.log("🚀 ~ file: client.js ~ line 107 ~ main ~ classic_transaction", classic_transaction);
 
     // Notes:
     // In case of error: `Error: XDR Write Error: [object Object] is not a LedgerKey` => seen when we try to invoke a custom method of custom smart contract; => try `let xdr_tx = hello_transaction.toXDR();`
