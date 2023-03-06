@@ -1,6 +1,6 @@
 import * as SorobanClient from "soroban-client" // // import * as SorobanClient from "stellar-sdk"
 import dotenv from "dotenv"
-import { Contract } from "soroban-client";
+import { Address, Contract } from "soroban-client";
 dotenv.config()
 
 export async function setHello(req, res) {
@@ -32,9 +32,9 @@ export async function setHello(req, res) {
         console.log("This is arg1 addr:");
 
         let method = "vault_req";
-        let arg1 = new SorobanClient.Address(publicKey).toScVal();
         // let arg1 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScAddress.scAddressTypeAccount(publicKey))
         //let arg1 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoAddress(publicKey));
+        let arg1 = new Address(invokerAddr).toScVal();
         console.log("This is arg1 addr:", arg1)
         let arg2 = SorobanClient.xdr.ScVal.scvU32(principle);
         //console.log("This is arg2 val:", arg2)
@@ -67,7 +67,7 @@ export async function setHello(req, res) {
         //let tras_xdr = transaction_with_footprint.toXDR();
         console.log("🚀 ~ file: helloServer.js ~ line 110 ~ main ~ transaction_with_footprint-:", inXdr);
 
-        await signTrx(tras_xdr);
+        // await signTrx(tras_xdr);
         res.send(inXdr);
 
     }
