@@ -28,12 +28,16 @@ export async function setHello(req, res) {
         
 
         let method = "vault_req";
+<<<<<<< HEAD
         // let arg1 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoAddress(pkey));
         let arg1 = new Address(invokerAddr).toScVal();
         
         // let arg1 = new SorobanClient.Address(publicKey).toScVal();
+=======
+>>>>>>> ea7e6d40ea7d76182d5cd55e40a0f0b23e889f13
         // let arg1 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScAddress.scAddressTypeAccount(publicKey))
         //let arg1 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoAddress(publicKey));
+        let arg1 = new Address(invokerAddr).toScVal();
         console.log("This is arg1 addr:", arg1)
         let arg2 = SorobanClient.xdr.ScVal.scvU32(principle);
         //console.log("This is arg2 val:", arg2)
@@ -66,7 +70,11 @@ export async function setHello(req, res) {
         //let tras_xdr = transaction_with_footprint.toXDR();
         console.log("🚀 ~ file: helloServer.js ~ line 110 ~ main ~ transaction_with_footprint-:", inXdr);
 
+<<<<<<< HEAD
     
+=======
+        // await signTrx(tras_xdr);
+>>>>>>> ea7e6d40ea7d76182d5cd55e40a0f0b23e889f13
         res.send(inXdr);
 
     }
