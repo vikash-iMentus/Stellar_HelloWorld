@@ -1,6 +1,6 @@
 import * as SorobanClient from "soroban-client" // // import * as SorobanClient from "stellar-sdk"
 import dotenv from "dotenv"
-import { Contract } from "soroban-client";
+import { Address, Contract } from "soroban-client";
 dotenv.config()
 
 export async function setHello(req, res) {
@@ -9,9 +9,7 @@ export async function setHello(req, res) {
     async function main() {
 
         const invokerKeypair = SorobanClient.Keypair.fromSecret(process.env.PRIVATE_KEY_INVOKER);
-
-
-        let publicKey = SorobanClient.Address.fromString(invokerAddr);
+        // let pkey = new Address(invokerAddr).toScVal();
 
         let contractIdObj = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoBytes(Buffer.from("0aab175ed995e17d75ea2d305f9396ff2b0410fb6c0390e37ab84ecf8282a5ec", 'hex')));
         //console.log("This is contractId:", contractIdObj);
@@ -20,19 +18,20 @@ export async function setHello(req, res) {
         // console.log("🚀 ~ file: helloServer.js ~ line 50 ~ main ~ server", server);
 
         const contract = new SorobanClient.Contract(process.env.CONTRACT_ID);
-        //  console.log("This is contract addr", contract);
         //let { sequence } = await server.getAccount(invokerKeypair.publicKey())
         let { sequence } = await server.getAccount(srcAddress)
-        //  console.log("🚀 ~ file: helloServer.js ~ line 56 ~ main ~ sequence", sequence.toString());
 
         let invokerAccount = new SorobanClient.Account(`${srcAddress}`, sequence.toString())
         // console.log("🚀 ~ file: helloServer.js ~ line 59 ~ main ~ invokerAccount", invokerAccount);
 
         /********** WAY 02: Build the hello transaction with SorobanClient.Operation.invokeHostFunction **********/
-        console.log("This is arg1 addr:");
+        
 
         let method = "vault_req";
-        let arg1 = new SorobanClient.Address(publicKey).toScVal();
+        // let arg1 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoAddress(pkey));
+        let arg1 = new Address(invokerAddr).toScVal();
+        
+        // let arg1 = new SorobanClient.Address(publicKey).toScVal();
         // let arg1 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScAddress.scAddressTypeAccount(publicKey))
         //let arg1 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoAddress(publicKey));
         console.log("This is arg1 addr:", arg1)
@@ -67,7 +66,7 @@ export async function setHello(req, res) {
         //let tras_xdr = transaction_with_footprint.toXDR();
         console.log("🚀 ~ file: helloServer.js ~ line 110 ~ main ~ transaction_with_footprint-:", inXdr);
 
-        await signTrx(tras_xdr);
+    
         res.send(inXdr);
 
     }
