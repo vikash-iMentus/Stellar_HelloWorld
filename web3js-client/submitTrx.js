@@ -6,6 +6,9 @@ dotenv.config()
 
 export async function submitTrs(req, res) {
     const { xdrForm } = req.body;
+    const idd = "b6f0697adfbb9c37771511169208d4291f84589056d7058cb8e32c35240ac329"
+    let res =  await server.getTransactionStatus(idd);
+    console.log("result", res);
     console.log("This is xdrForm::", xdrForm);
 
     const tx = SorobanClient.TransactionBuilder.fromXDR(`${xdrForm}`, process.env.NETWORK_PASSPHRASE);
@@ -24,15 +27,9 @@ export async function submitTrs(req, res) {
         if (response) {
     
             console.log("RESPONSE:");
-            // const id = "6dbf65225763f5f27397e3855db9b6eb867631b853c87de52889d21211a296e4";
             const idd = response.id;
             let res =  await server.getTransactionStatus(idd);
             console.log("result", res);
-            // const tx = SorobanClient.TransactionBuilder.fromXDR(res.resultXdr, process.env.NETWORK_PASSPHRASE);
-            // console.log("RESULTXDR: ", tx);
-            // let result = JSON.stringify(SorobanClient.TransactionBuilder.fromXDR(res.resultXdr, process.env.NETWORK_PASSPHRASE))
-            // let result = JSON.stringify(res.resultXdr);
-            // console.log(result);
         }
     } catch (error) {
         console.log(`Tx Failed! More details:\n${JSON.stringify(error)}`);
