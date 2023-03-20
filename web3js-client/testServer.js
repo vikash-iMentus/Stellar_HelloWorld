@@ -1,8 +1,8 @@
 import express from "express";
-import { setPayment } from "./paymentServer.js";
+import { Hello1 } from "./test_hello/hello1.js";
+import { Hello2 } from "./test_hello/hello2.js";
+import { World } from "./test_hello/world1.js";
 import { submitTrs } from "./submitTrx.js";
-import { setHello } from "./helloServer.js";
-import { depFun } from "./depositeFun.js";
 import dotenv from "dotenv"
 dotenv.config();
 const port = 5000;
@@ -14,9 +14,9 @@ app.get("/", (req, res) => {
     res.send("Hello from express");
 });
 
-app.post("/hello", setHello);
-app.post("/payment", setPayment);
+app.post("/hello1", Hello1);
+app.post("/hello2", Hello2);
+app.post("/world", World);
 app.post("/sendTrx", submitTrs);
-app.post("/depositTrx", depFun);
 
 app.listen(port, () => console.log('App listening on port ' + port));

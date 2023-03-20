@@ -3,13 +3,18 @@ import dotenv from "dotenv";
 import * as SorobanClient from "soroban-client";
 
 dotenv.config()
+console.log("Config readed");
 
+console.log(process.env.PRIVATE_KEY_INVOKER);
 const invokerKeypair = SorobanClient.Keypair.fromSecret(process.env.PRIVATE_KEY_INVOKER);
+let str = "AAAAAgAAAADRwOwTLThAnnLkCD9FveSsCLp+5gQVr+JfdY5Yc4L2vQAAAGQAA62OAAAAAgAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAGAAAAAAAAAADAAAABAAAAAEAAAAGAAAAIAteSfAVgW/eDkWrIAwzY4oLDaVFJ7B6PTsSerrv4+stAAAABQAAAAZ3b3JsZDQAAAAAAAQAAAABAAAAAgAAAAAAAAAnAAAAAQAAAAYLXknwFYFv3g5FqyAMM2OKCw2lRSewej07Enq67+PrLQAAAAMAAAADAAAAAAAAAAAAAAAAAAAAAA==";
+console.log("read str");
 
-const tx = SorobanClient.TransactionBuilder.fromXDR("AAAAAgAAAAD6F41mIP5FgS3o/pl1xQrVs8/BL14clmUwy9PNWJkj2gAAAGQAAp7aAAAAAwAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAGAAAAAAAAAAEAAAABAAAAAEAAAAGAAAAIHX6UKvD7qWgBsDlLi/dnUwBHrEsX+q/Rwt/7zAtsIctAAAABQAAAAp0ZXN0X2hlbGxvAAAAAAAFAAAAA0pheQAAAAABAAAAAgAAAAEAAAAGdfpQq8PupaAGwOUuL92dTAEesSxf6r9HC3/vMC2why0AAAADAAAAAwAAAAAAAAAAAAAAAAAAAAA=", process.env.NETWORK_PASSPHRASE);
+const tx = SorobanClient.TransactionBuilder.fromXDR(str, process.env.NETWORK_PASSPHRASE);
 console.log("Converted in trs obj:", tx);
 
 const trs = tx.sign(invokerKeypair);
 //console.log("This is signed trs:", trs);
 
-console.log("Signed tx", tx.toXDR())
+console.log("Signed tx", tx.toXDR());
+

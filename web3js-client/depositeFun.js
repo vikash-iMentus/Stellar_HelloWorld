@@ -3,16 +3,10 @@ import dotenv from "dotenv"
 import { Address, Contract } from "soroban-client";
 dotenv.config()
 
-export async function setHello(req, res) {
-    const { invokerAddr, principle, rate, loanTerm, srcAddress } = req.body;
+export async function depFun(req, res) {
+    const { invoker, amount, unique_id, srcAddress } = req.body;
 
     async function main() {
-
-        const invokerKeypair = SorobanClient.Keypair.fromSecret(process.env.PRIVATE_KEY_INVOKER);
-        // let pkey = new Address(invokerAddr).toScVal();
-
-        let contractIdObj = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoBytes(Buffer.from("0aab175ed995e17d75ea2d305f9396ff2b0410fb6c0390e37ab84ecf8282a5ec", 'hex')));
-        //console.log("This is contractId:", contractIdObj);
 
         const server = new SorobanClient.Server(process.env.SOROBAN_RPC_URL, { allowHttp: true }); // we call node as server here
         // console.log("🚀 ~ file: helloServer.js ~ line 50 ~ main ~ server", server);
@@ -27,29 +21,30 @@ export async function setHello(req, res) {
         /********** WAY 02: Build the hello transaction with SorobanClient.Operation.invokeHostFunction **********/
 
 
-        let method = "vault_req";
+        let method = "deposit";
         // let arg1 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScAddress.scAddressTypeAccount(publicKey))
         //let arg1 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoAddress(publicKey));
-        let arg1 = new Address(invokerAddr).toScVal();
-        console.log("This is arg1 addr:", arg1)
-        let arg2 = SorobanClient.xdr.ScVal.scvU32(principle);
-        console.log("This is arg2 val:", arg2)
-        let arg3 = SorobanClient.xdr.ScVal.scvU32(rate);
-        console.log("arg3", typeof (arg3));
-        //console.log("This is arg3 val:", arg3)
-        let arg4 = SorobanClient.xdr.ScVal.scvU32(loanTerm);
-        //console.log("This is arg4 val:", arg4);
-        // let arg5 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoBytes(contractIdObj));
-        let arg5 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoBytes(Buffer.from("0aab175ed995e17d75ea2d305f9396ff2b0410fb6c0390e37ab84ecf8282a5ec", 'hex')));
-        console.log("This is arg5 val:", arg5);
-        // let arg6 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoBytes(wasmHash));
-        // console.log("This is arg6 val:", arg6);
-        let arr = [arg1, arg2, arg3, arg4, arg5];
+        let arg1 = new Address(invoker).toScVal();
+        console.log("This is arg1 addr:", typeof (arg1));
+        let low = new SorobanClient.xdr.Uint64(amount);
+        console.log("line 29", low);
+        let val = new SorobanClient.xdr.Int128Parts({ lo: low, hi: low });
+        let arg2 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoI128(val));
+        console.log("This is arg2 addr:", val);
+
+
+        let l = new SorobanClient.xdr.Uint64(unique_id);
+        console.log("line 36  UINT64: ", l);
+        let valu = new SorobanClient.xdr.Int128Parts({ lo: l, hi: l });
+
+        let arg3 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoU128(valu));
+        console.log("This is arg3 addr:", typeof (arg3));
+        let arr = [arg1, arg2, arg3];
 
         // let hello_transaction_argument = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScVal.scvSymbol('World'))
         // let contractIdObj = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoBytes(Buffer.from(process.env.CONTRACT_ID, 'hex')));
 
-        let hello_transaction = new SorobanClient.TransactionBuilder(invokerAccount, {
+        let dep_transaction = new SorobanClient.TransactionBuilder(invokerAccount, {
             fee: 100,
             networkPassphrase: process.env.NETWORK_PASSPHRASE,
             v1: true
@@ -58,9 +53,9 @@ export async function setHello(req, res) {
             .setTimeout(SorobanClient.TimeoutInfinite)
             .build();
 
-        console.log("🚀 ~ file: helloServer.js ~ line 96 ~ main ~ build hello_transaction without footprint, only opts", hello_transaction);
+        console.log("🚀 ~ file: helloServer.js ~ line 96 ~ main ~ build hello_transaction without footprint, only opts", dep_transaction);
 
-        const inXdr = hello_transaction.toXDR();
+        const inXdr = dep_transaction.toXDR();
         //let tras_xdr = transaction_with_footprint.toXDR();
         console.log("🚀 ~ file: helloServer.js ~ line 110 ~ main ~ transaction_with_footprint-:", inXdr);
 

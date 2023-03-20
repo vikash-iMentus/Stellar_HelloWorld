@@ -19,4 +19,3 @@ console.log('Transaction has been signed using invokerKeypair.');
 const signedTx = await tx.toEnvelope().toXDR('base64')
 console.log("Signed in xdr:", signedTx);
 
-
