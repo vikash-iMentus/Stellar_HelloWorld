@@ -3,9 +3,9 @@ import { addFootprint } from './addfootprint.js';
 import { encode } from './encode.js';
 import { parse } from './xdrConverter.js';
 
-// const CONTRACT_ID = 'd9bc67c4b0b8b7d14677a3a9af8d2e014a1895d80e458beea9b27453c0bcb50b';
-const CONTRACT_ID =
-  'd9bc67c4b0b8b7d14677a3a9af8d2e014a1895d80e458beea9b27453c0bcb50b';
+
+const CONTRACT_ID ='b876fcda3560b559b0ae66dcc520bfbd5f170de3edbe72721de0b575fa2d11a8'; //values
+// const CONTRACT_ID ='99aa90dc4eeb4acf8aba9eb5f5c2f1df95c082431c843d2d3d359c343b256491'; //Trilobyte
 const PUBLICKEY = 'GAQHL6ZPILHKVSC7OG7NRJP2X33MYYF4PQCWVTLMLKUHLNFS4FF4NPTI';
 const PRIVATE_KEY = 'SADJKHWL7RK5KBBOAFGKM257GK7QXYN5YYHHDMGEYHUKZ3WLVLX5JWVI';
 const NETWORK_PASSPHRASE = 'Test SDF Future Network ; October 2022';
@@ -19,12 +19,17 @@ test_BY();
 async function test_BY() {
   console.log('start test', server);
   try {
-    let methodName = '_Symbol';
+    let methodName = 'custom';
     let obj = {
       type: 'scvSymbol', // scvSymbol, scvU32,scoU64,bytesn32,address
-      value: 'santysanty',
+      value:"divya",
     };
+    // let obj2 = {
+    //   type: 'scvU32', // scvSymbol, scvU32,scoU64,bytesn32,address
+    //   value: 4,
+    // };
     let argument = encode(obj);
+    // let argument2 = encode(obj2);
     console.log('🚀 ~ test_BY ~ argument', argument);
 
     let arr = [argument];
@@ -34,6 +39,7 @@ async function test_BY() {
       methodName,
       ...arr
     );
+    
     console.log('resutl', result);
   } catch (error) {
     console.log('error', error);

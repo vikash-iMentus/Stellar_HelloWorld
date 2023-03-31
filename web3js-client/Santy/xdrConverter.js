@@ -3,13 +3,27 @@ import * as SorobanClient from 'soroban-client'; // // import * as SorobanClient
 import { decode } from './utilities/base64.js';
 import * as Stellar from 'stellar-sdk'
 import *as hex from './utilities/hex.js'
+import { json } from 'express';
+import { toJSON } from 'json-xdr';
 
 export const parse = (xdr, type=null) => {
   const parsed= parseRaw(xdr, type);
-  return type ? { [type]: parsed } : parsed;
+  if (type == "obj") { 
+        let json = JSON.stringify(parsed);
+        let parsedJson = JSON.parse(json);    
+        let map = parsedJson.map?.map((a) => ({
+          [a.key.sym]: a.val.i128?.lo ?? Object.values(a.val)
+        })) ?? parsedJson;
+        return map;   
+      }
+      else{
+        return type ? { [type]: parsed } : parsed;
+      }
 };
 export const parseRaw = (xdr, parentType) => {
-  // console.log('function start');
+  // console.log('function start *************');
+  
+   
   if (xdr instanceof XDR.Struct) {
     // console.log('🚀 ~ parseRaw ~ XDR.Struct', XDR.Struct);
     // console.log('parseRaw if');
@@ -19,7 +33,7 @@ export const parseRaw = (xdr, parentType) => {
     }
     return buffer;
   } else if (xdr instanceof XDR.Union) {
-    // console.log('🚀 ~ parseRaw ~ XDR.Union', XDR.Union);
+    // console.log('🚀 ~ parseRaw ~ XDR.Union');
     if (Number.isInteger(xdr._switch)) {
       // console.log('🚀 ~ parseRaw ~ xdr._switch', xdr._switch);
       return xdr._switch;
@@ -36,7 +50,7 @@ export const parseRaw = (xdr, parentType) => {
       [xdr.name]: parse(xdr.value, null),
     };
   } else if (xdr instanceof XDR.Hyper) {
-    // console.log('🚀 ~ parseRaw ~ XDR.Hyper', XDR.Hyper);
+    // console.log('🚀 ~ parseRaw ~ XDR.Hyper', XDR.Hyper); 
     const number = (BigInt(xdr.high) << BigInt.asIntN(32, xdr.high)) | BigInt(xdr.low);
 
     if (number === BigInt(Number.parseInt(number.toString()))) {
@@ -45,6 +59,8 @@ export const parseRaw = (xdr, parentType) => {
       return number;
     }
   } else if (xdr instanceof XDR.UnsignedHyper) {
+    // console.log('🚀 ~ parseRaw ~ XDR.UnsignedHyper'); 
+  
     const number = (
       (BigInt(xdr.high) <<BigInt (32)) |
       (BigInt(xdr.low))
@@ -63,10 +79,10 @@ export const parseRaw = (xdr, parentType) => {
       return number;
     }
   } else if (Number.isInteger(xdr)) {
-    console.log("number",Number.parseInt(xdr))
+    // console.log("number",Number.parseInt(xdr))
     return Number.parseInt(xdr);
   } else if (xdr instanceof Uint8Array) {
-    console.log('🚀 ~ parseRaw ~ Uint8Array', Uint8Array);
+    // console.log('🚀 ~ parseRaw ~ Uint8Array', Uint8Array);
 
     if (parentType === 'ed25519') {
       try {
@@ -86,10 +102,10 @@ export const parseRaw = (xdr, parentType) => {
     console.log("🚀 ~ parseRaw ~ hex.encode(xdr)", hex.encode(xdr))
     return  hex.encode(xdr)
     } else if (xdr instanceof Array) {
-    // console.log('🚀 ~ parseRaw261 ~ xdr', xdr);
+    // console.log('🚀 ~ parseRaw261 ~ Array', xdr);
     return xdr.map((xdr) => parse(xdr));
   } else {
-    console.log(xdr, '264');
+    // console.log(xdr, '264');
     return null;
   }
 };
