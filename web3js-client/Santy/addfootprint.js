@@ -2,6 +2,7 @@ import * as SorobanClient from 'soroban-client';
 import { decode } from './utilities/base64.js';
 
 const PUBLICKEY = 'GAQHL6ZPILHKVSC7OG7NRJP2X33MYYF4PQCWVTLMLKUHLNFS4FF4NPTI';
+// const PUBLICKEY = 'GBBUGF3HLI24JHTY4NXMY76DGJ4CYUVD6CFY26SV6FOZQQQPJQOBIMUI';
 
 export const addFootprint = (raw, networkPassphrase, footprint) => {
   if ('innerTransaction' in raw) {
