@@ -1,4 +1,7 @@
-import * as SorobanClient from 'soroban-client'; // // import * as SorobanClient from "stellar-sdk"
+import * as SorobanClient from 'soroban-client'; 
+// // import * as SorobanClient from "stellar-sdk"
+import { Address, Contract } from "soroban-client";
+
 
 export const encode = (val) => {
   switch (val.type) {
@@ -28,6 +31,20 @@ export const encode = (val) => {
       let i128 = new SorobanClient.xdr.Int128Parts({ lo: i64, hi: i64 });
       let scoI128 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoI128(i128));
       return scoI128;
+    case 'vecAddress':
+      let ar_addr = [];
+        let scAd;
+        let addr;
+        let strAddress= "";
+        for (let i = 0; i < val.value.length; i++) {  
+            strAddress = val.value[i].toString();
+            console.log(typeof(strAddress));
+            scAd = new Address(strAddress).toScAddress();
+            addr = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoAddress(scAd));
+            ar_addr.push(addr)
+        }        
+    let vecAddress =  SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoVec(ar_addr));
+    return vecAddress
 
     default:
       break;

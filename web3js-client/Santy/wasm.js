@@ -3,11 +3,28 @@ import { addFootprint } from './addfootprint.js';
 import { encode } from './encode.js';
 import { parse } from './xdrConverter.js';
 import { Address, Contract } from "soroban-client";
+
+import * as base64 from 'base64-js';
+import { sha256 } from 'js-sha256';
 import crypto from 'crypto';
 
+function stellarAddressToBytes32(address) {
+  // Decode the base32-encoded address
+  const decoded = base64.toByteArray(address);
 
+  // Strip the network prefix (the first byte) and checksum (the last 2 bytes)
+  const stripped = decoded.slice(1, -2);
+
+  // Compute the SHA-256 hash of the stripped bytes
+  const hashed = sha256.array(stripped);
+
+  // Return the first 32 bytes of the hash
+  return hashed.slice(0, 32);
+}
+
+// const crypto = require('crypto');
 // const CONTRACT_ID ='b876fcda3560b559b0ae66dcc520bfbd5f170de3edbe72721de0b575fa2d11a8'; //values
-const CONTRACT_ID ='6052743135c590f4b812615bdc999bc5a4aa1a19efc172c1f611244249a69658';
+const CONTRACT_ID ='f943199e75a863be1fe2e64c427822ea4f5fe5aba5324165f73627b740eea4e0';
 // const CONTRACT_ID ='99aa90dc4eeb4acf8aba9eb5f5c2f1df95c082431c843d2d3d359c343b256491'; //Trilobyte
 const PUBLICKEY = 'GAQHL6ZPILHKVSC7OG7NRJP2X33MYYF4PQCWVTLMLKUHLNFS4FF4NPTI';
 const PRIVATE_KEY = 'SADJKHWL7RK5KBBOAFGKM257GK7QXYN5YYHHDMGEYHUKZ3WLVLX5JWVI';
@@ -21,99 +38,37 @@ const server = new SorobanClient.Server(SOROBAN_RPC_URL, { allowHttp: true }); /
 test_BY();
 async function test_BY() {
   console.log('start test', server);
+
+  // Generate a 16-byte (128-bit) random salt
+  
+  // Convert the salt to a hex string
+  
+  
   const salt = crypto.randomBytes(32);
   const hexSalt = salt.toString('hex');
+  // date.toString
+  // log("date", date)
   try {
-    let methodName = 'vault_req';
+    let methodName = 'washm';
     let obj = {
-      type: 'address', // scvSymbol, scvU32,scoU64,bytesn32,address
-      value:'GATD645QCSAXJUWEVW3AYO4BLGALDRMGKCYXWMUCB4XNSWMSK32MGEQI',
+      type: 'bytesn32', // scvSymbol, scvU32,scoU64,bytesn32,address
+      value: "b60fb504dd93ab0a003b3859647ef36cc8bf838ba801fa56f34cb3b2e94b9d61",
     };
     let obj2 = {
-      type: 'scvU32', // scvSymbol, scvU32,scoU64,bytesn32,address
-      value: 2000,
-    };
-    let obj3 = {
-      type: 'scvU32', // scvSymbol, scvU32,scoU64,bytesn32,address
-      value: 8,
-    };
-    let obj4 = {
-      type: 'scvU32', // scvSymbol, scvU32,scoU64,bytesn32,address
-      value: 8,
-    };
-    let obj5 = {
-      type: 'bytesn32', // scvSymbol, scvU32,scoU64,bytesn32,address
-      value: "60b32529639664bb964182e528f7b48439ebb594632cb1dfc45fc534c3488fb7",
-    };
-    let obj6 = {
-      type: 'bytesn32', // scvSymbol, scvU32,scoU64,bytesn32,address
-      value: 'b60fb504dd93ab0a003b3859647ef36cc8bf838ba801fa56f34cb3b2e94b9d61',
-    };
-    let obj7 = {
       type: 'bytesn32', // scvSymbol, scvU32,scoU64,bytesn32,address
       value: hexSalt,
     };
-    let obj8 ={
-      type:"vecAddress",
-      value:["GCJYZB7X74BXD656IZNCB4QOYOPCX5CDRJQ2SNTVH4ADZJGPTGTYDSQV"]
+    let obj3={
+      type:'vecAddress',
+      value:["GAQHL6ZPILHKVSC7OG7NRJP2X33MYYF4PQCWVTLMLKUHLNFS4FF4NPTI"]
     }
-    let obj9 ={
-      type:"vecAddress",
-      value:["GCJYZB7X74BXD656IZNCB4QOYOPCX5CDRJQ2SNTVH4ADZJGPTGTYDSQV"]
-    }
-    // let p7 = ["GCJYZB7X74BXD656IZNCB4QOYOPCX5CDRJQ2SNTVH4ADZJGPTGTYDSQV"]
-    // let ar_addr = [];
-    //     let scAd;
-    //     let addr;
-    //     let strAddress= "";
-    //     for (let i = 0; i < p7.length; i++) {  
-    //         strAddress = p7[i].toString();
-    //         console.log(typeof(strAddress));
-    //         scAd = new Address(strAddress).toScAddress();
-    //         addr = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoAddress(scAd));
-    //         ar_addr.push(addr)
-    //     }
-        
-    // let arg7 =  SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoVec(ar_addr));
-    // console.log("This is arg7 addr:", typeof(arg7));
-
-    // let p8 = ["GCJYZB7X74BXD656IZNCB4QOYOPCX5CDRJQ2SNTVH4ADZJGPTGTYDSQV"]
-
-    // let ar_addr2 = [];
-    //     let scAd2;
-    //     let addr2;
-    //     let strAddress2= "";
-    //     for (let i = 0; i < p8.length; i++) {  
-    //         strAddress2 = p7[i].toString();
-    //         console.log(typeof(strAddress2));
-    //         scAd2 = new Address(strAddress2).toScAddress();
-    //         addr2 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoAddress(scAd2));
-    //         ar_addr2.push(addr2)
-    //     }
-        
-    // let arg8 =  SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoVec(ar_addr2));
-    // console.log("This is arg7 addr:", typeof(arg8));
-    // let obj7 = {
-    //   type: 'scoVec', // scvSymbol, scvU32,scoU64,bytesn32,address
-    //   value: "GCVQP6ZFDU7BU2I4CQCS3KFUYS6FWDBOZPVMRVUWN625ZCYVG32KOVGC",
-    // };
-    // let obj8 = {
-    //   type: 'scoVec', // scvSymbol, scvU32,scoU64,bytesn32,address
-    //   value: "GCJYZB7X74BXD656IZNCB4QOYOPCX5CDRJQ2SNTVH4ADZJGPTGTYDSQV",
-    // };
-    let argument = encode(obj);
-    let argument2 = encode(obj2);
+    let argument = encode(obj); 
+    let argument2 = encode(obj2); 
     let argument3 = encode(obj3);
-    let argument4 = encode(obj4);
-    let argument5 = encode(obj5);
-    let argument6 = encode(obj6);
-    let argument7 = encode(obj7);
-    let argument8 = encode(obj8);
-    let argument9 = encode(obj9);
-    
+    console.log("🚀 ~ test_BY ~ argument3",argument3);  
     console.log('🚀 ~ test_BY ~ argument', argument);
 
-    let arr = [argument,argument2,argument3,argument4,argument5,argument6,argument7,argument8,argument9];
+    let arr = [argument,argument2];
     let result = await fetchContractValue(
       server,
       CONTRACT_ID,
