@@ -61,46 +61,7 @@ async function test_BY() {
       type:"vecAddress",
       value:["GCJYZB7X74BXD656IZNCB4QOYOPCX5CDRJQ2SNTVH4ADZJGPTGTYDSQV"]
     }
-    // let p7 = ["GCJYZB7X74BXD656IZNCB4QOYOPCX5CDRJQ2SNTVH4ADZJGPTGTYDSQV"]
-    // let ar_addr = [];
-    //     let scAd;
-    //     let addr;
-    //     let strAddress= "";
-    //     for (let i = 0; i < p7.length; i++) {  
-    //         strAddress = p7[i].toString();
-    //         console.log(typeof(strAddress));
-    //         scAd = new Address(strAddress).toScAddress();
-    //         addr = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoAddress(scAd));
-    //         ar_addr.push(addr)
-    //     }
-        
-    // let arg7 =  SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoVec(ar_addr));
-    // console.log("This is arg7 addr:", typeof(arg7));
 
-    // let p8 = ["GCJYZB7X74BXD656IZNCB4QOYOPCX5CDRJQ2SNTVH4ADZJGPTGTYDSQV"]
-
-    // let ar_addr2 = [];
-    //     let scAd2;
-    //     let addr2;
-    //     let strAddress2= "";
-    //     for (let i = 0; i < p8.length; i++) {  
-    //         strAddress2 = p7[i].toString();
-    //         console.log(typeof(strAddress2));
-    //         scAd2 = new Address(strAddress2).toScAddress();
-    //         addr2 = SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoAddress(scAd2));
-    //         ar_addr2.push(addr2)
-    //     }
-        
-    // let arg8 =  SorobanClient.xdr.ScVal.scvObject(SorobanClient.xdr.ScObject.scoVec(ar_addr2));
-    // console.log("This is arg7 addr:", typeof(arg8));
-    // let obj7 = {
-    //   type: 'scoVec', // scvSymbol, scvU32,scoU64,bytesn32,address
-    //   value: "GCVQP6ZFDU7BU2I4CQCS3KFUYS6FWDBOZPVMRVUWN625ZCYVG32KOVGC",
-    // };
-    // let obj8 = {
-    //   type: 'scoVec', // scvSymbol, scvU32,scoU64,bytesn32,address
-    //   value: "GCJYZB7X74BXD656IZNCB4QOYOPCX5CDRJQ2SNTVH4ADZJGPTGTYDSQV",
-    // };
     let argument = encode(obj);
     let argument2 = encode(obj2);
     let argument3 = encode(obj3);
